@@ -41,12 +41,22 @@ public:
         cout << "constructor : " << _n << " / " << _d << endl;
         #endif
     }
-    Frac(const Frac &f) {
+
+    // コピーコンストラクタ
+    Frac(const Frac &f) : _n(f._n), _d(f._d) {
         #ifdef MY_DEBUG
         cout << "copy constructor : " << f._n << " / " << f._d << endl;
         #endif
-        *this = f;
     }
+
+    // コピーコンストラクタ（=演算子使用）
+    // Frac(const Frac &f) {
+    //     #ifdef MY_DEBUG
+    //     cout << "copy constructor : " << f._n << " / " << f._d << endl;
+    //     #endif
+    //     *this = f;
+    // }
+
 
     Frac &operator=(const Frac &f) {
         _n = f._n;
@@ -67,7 +77,7 @@ public:
         return *this;
     }
 
-    Frac reduce(const Frac &f) const {
+    Frac reduce() const {
         Frac ret = *this;
         int g = gcm(_n, _d);
         ret._n /= g;
@@ -79,6 +89,7 @@ public:
     int numerator() const { return _n; }
     int denominator() const { return _d; }
     double toDouble() const { return _n / _d; }
+    string str() const { return to_string(_n) + " / " + to_string(_d); }
 };
 
 Frac operator+(const Frac &f1, const Frac &f2) {
