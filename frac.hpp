@@ -57,6 +57,11 @@ public:
     //     *this = f;
     // }
 
+    ~Frac() {
+    #ifdef MY_DEBUG
+        cout << "destructor : " << _n << " / " << _d << endl;
+        #endif
+    }
 
     Frac &operator=(const Frac &f) {
         _n = f._n;
